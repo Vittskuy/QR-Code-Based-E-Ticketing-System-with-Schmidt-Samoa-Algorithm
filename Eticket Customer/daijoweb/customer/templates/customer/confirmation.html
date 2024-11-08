@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daijo Ticket - Confirmation</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #E7DACD;  /* Warna latar belakang yang sama dengan halaman lain */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/daijosing.png' %}");
+            background-size: contain;
+            background-position: right top;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Agar gambar tetap di posisinya saat di-zoom */
+            font-size: 1.4em;  /* Memperbesar ukuran font sebesar 1.3x */
+        }
+        .header {
+            color: #1A4A4F;  /* Warna teks untuk judul */
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .form-container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0;
+        }
+        .confirmation-details {
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-column-gap: 10px;
+            align-items: center;
+        }
+        .confirmation-details .label,
+        .confirmation-details div:nth-child(even) {
+            margin-bottom: 10px;  /* Jarak antara elemen */
+        }
+        .confirmation-details .label {
+            font-weight: bold;
+        }
+        .button-container {
+            position: absolute;
+            bottom: 20px;  /* Jarak tombol dari bawah */
+            left: 20px;  /* Jarak tombol dari kiri */
+        }
+        .btn-custom {
+            background-color: #716847;  /* Warna tombol */
+            border-color: #716847;
+            color: white;
+            margin-right: 10px; /* Jarak antar tombol */
+        }
+        .btn-custom:hover {
+            background-color: #5f5640; /* Warna saat tombol di-hover */
+        }
+        .processing-message {
+            display: none;
+            color: #1A4A4F;
+            font-size: 1.2em;
+            margin-top: 20px;
+            font-weight: bold; /* Membuat font menjadi tebal */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="header">Konfirmasi Pembelian</h1>
+        <div class="confirmation-details">
+            <div class="label">Nama:</div> <div>{{ ticket_data.name }}</div>
+            <div class="label">Email:</div> <div>{{ ticket_data.email }}</div>
+            <div class="label">Nomor Telepon:</div> <div>{{ ticket_data.phone }}</div>
+            <div class="label">Seating Plan:</div> <div>{{ ticket_data.seating_plan }}</div>
+            <div class="label">Seat Number:</div> <div>{{ ticket_data.seat_number }}</div>
+        </div>
+        <form method="post" onsubmit="return handleSubmit(event)">
+            {% csrf_token %}
+            <div class="button-container">
+                <button type="submit" name="edit" class="btn btn-primary btn-custom">< Edit</button>
+                <button type="submit" name="buy" class="btn btn-primary btn-custom">Beli   ></button>
+            </div>
+        </form>
+        <div id="processingMessage" class="processing-message">
+            Sedang memproses tiket Anda, harap tunggu!
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        function handleSubmit(event) {
+            var buyButton = event.target.querySelector('button[name="buy"]');
+            if (buyButton && buyButton === document.activeElement) {
+                document.getElementById('processingMessage').style.display = 'block';
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

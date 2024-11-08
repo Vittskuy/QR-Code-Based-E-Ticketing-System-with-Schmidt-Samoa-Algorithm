@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daijo Ticket - Thank You</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #E7DACD;  /* Warna latar belakang yang sama dengan halaman lain */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+        }
+        .header {
+            color: #1A4A4F;  /* Warna teks untuk judul */
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .subheader {
+            color: #1A4A4F;  /* Warna teks untuk subjudul */
+            font-size: 1.4em;
+            font-weight: bold
+            margin-bottom: 20px;
+        }
+        .image-container {
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 50%;  /* Mengatur ukuran maksimal gambar */
+            height: auto;
+        }
+        .info-text {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .btn-custom {
+            background-color: #716847;  /* Warna tombol */
+            border-color: #716847;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+        }
+        .btn-custom:hover {
+            background-color: #5f5640; /* Warna saat tombol di-hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1 class="header">Terima Kasih</h1>
+        <h2 class="subheader">telah membeli tiket di Daijo Ticket!</h2>
+        <div class="image-container">
+            <img src="{% static 'images/terimakasih.png' %}" alt="Thank You Image">
+        </div>
+        <p class="info-text">QR Code Tiket telah dikirim melalui email</p>
+        <div class="button-container">
+            <a href="/" class="btn btn-primary btn-custom">Beli Tiket Lain</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

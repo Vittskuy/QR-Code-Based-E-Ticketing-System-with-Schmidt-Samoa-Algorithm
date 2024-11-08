@@ -1,0 +1,23 @@
+<html>
+<head>
+    <style>
+        body { background-color: green; }
+        .button-container { position: absolute; bottom: 0; left: 0; }
+    </style>
+</head>
+<body>
+    <p>Konfirmasi Pembelian:</p>
+    <p>Nama: {{ ticket_data.name }}</p>
+    <p>Email: {{ ticket_data.email }}</p>
+    <p>Telepon: {{ ticket_data.phone }}</p>
+    <p>Seating Plan: {{ ticket_data.seating_plan }}</p>
+    <p>Nomor Kursi: {{ ticket_data.seat_number }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="button-container">
+            <button type="submit" name="edit">Edit</button>
+            <button type="submit" name="buy">Beli</button>
+        </div>
+    </form>
+</body>
+</html>

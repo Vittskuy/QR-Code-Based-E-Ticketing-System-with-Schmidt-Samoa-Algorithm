@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daijo Ticket - Details</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #E7DACD;  /* Warna latar belakang yang sama dengan halaman home */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/daijosing.png' %}");
+            background-size: contain;
+            background-position: right top;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Agar gambar tetap di posisinya saat di-zoom */
+            font-size: 1.2em;  /* Memperbesar ukuran font sebesar 1.5x */
+        }
+        .header {
+            color: #1A4A4F;  /* Warna teks untuk judul "Beli Tiket" */
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .form-container {
+            padding: 20px;  /* Tambahkan padding untuk memberikan sedikit ruang */
+            max-width: 600px;
+            margin: 0;  /* Hilangkan margin auto untuk meratakan kiri */
+            font-weight: bold
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column; /* Mengatur elemen form dalam satu kolom */
+            margin-bottom: 10px; /* Tambahkan margin bawah untuk sedikit ruang antar elemen form */
+        }
+        .form-group-inline {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* Tambahkan margin bawah untuk sedikit ruang antar elemen form */
+        }
+        .form-group label {
+            min-width: 180px;  /* Sesuaikan nilai ini untuk membuat jarak antar label dan input field sama */
+            margin-right: 10px; /* Jarak antara label dan input field */
+        }
+        .form-group small {
+            font-size: 0.8em; /* Ukuran font kecil */
+            color: #666666;  /* Warna font kecil */
+        }
+        .button-container {
+            position: absolute;
+            bottom: 20px;  /* Jarak tombol dari bawah */
+            left: 20px;  /* Jarak tombol dari kiri */
+        }
+        .btn-custom {
+            background-color: #716847;  /* Warna tombol untuk semua tombol di web */
+            border-color: #716847;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #5f5640; /* Warna saat tombol di-hover */
+        }
+        .form-group-inline label {
+            margin-right: 10px; /* Jarak antara label dan input field untuk form-group-inline */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="header">Beli Tiket</h1>
+        <form method="post" id="ticketForm">
+            {% csrf_token %}
+            <div class="form-group">
+                <p></p>
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                <small>*Nama harus sesuai KTP atau identitas untuk validasi, tiket tidak dapat dipindahtangankan</small>
+            </div>
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                <small>*Email untuk pengiriman tiket. Pastikan email valid</small>
+            </div>
+            <div class="form-group">
+                {{ form.phone.label_tag }}
+                {{ form.phone }}
+                <p></p>
+            </div>
+            <div class="form-group-inline">
+                {{ form.seating_plan.label_tag }}
+                <div style="margin-right: 20px;">{{ form.seating_plan }}</div>
+                <span style="margin-left: 50px;">{{ form.seat_number.label_tag }}</span>
+                {{ form.seat_number }}
+            </div>
+        </form>
+    </div>
+    <div class="button-container">
+        <button type="submit" class="btn btn-primary btn-custom" form="ticketForm">Lanjut</button>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

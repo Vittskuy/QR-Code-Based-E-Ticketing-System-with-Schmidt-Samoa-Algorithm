@@ -1,0 +1,21 @@
+<html>
+<head>
+    <style>
+        body { background-color: green; }
+        .button-container { position: absolute; bottom: 0; left: 0; }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="event">Pilih Event:</label>
+        <select name="event" id="event">
+            <option value="event1">Event 1</option>
+            <option value="event2">Event 2</option>
+        </select>
+        <div class="button-container">
+            <button type="submit">Beli Tiket</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,13 @@
+body {
+    background-color: #E7DACD;  /* Warna latar belakang untuk semua halaman customer */
+}
+
+.btn-custom {
+    background-color: #716847;  /* Warna tombol untuk semua tombol di web */
+    border-color: #716847;
+    color: white;
+}
+
+.welcome-text {
+    color: #1A4A4F;  /* Warna teks untuk "Selamat Datang di Daijo Ticket!" */
+}

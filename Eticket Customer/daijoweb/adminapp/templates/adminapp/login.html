@@ -1,0 +1,51 @@
+<!-- adminapp/templates/adminapp/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <!-- Mengimpor library jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <h1>Admin Login</h1>
+    <form id="login-form" method="post" action="{% url 'admin_login' %}">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+    <p id="error-message" style="color: red;"></p>
+    <script>
+        $(document).ready(function(){
+            $('#login-form').on('submit', function(event){
+                event.preventDefault(); // Mencegah pengiriman form secara default
+                $.ajax({
+                    url: '{% url "admin_login" %}',
+                    type: 'POST',
+                    data: {
+                        username: $('#username').val(),
+                        password: $('#password').val(),
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function(response){
+                        if (response.success) {
+                            window.location.href = response.redirect_url; // Redirect jika login berhasil
+                        } else {
+                            $('#error-message').text(response.message); // Tampilkan pesan kesalahan
+                        }
+                    },
+                    error: function(){
+                        $('#error-message').text('Terjadi kesalahan. Silakan coba lagi.'); // Tampilkan pesan kesalahan umum
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!-- adminapp/templates/adminapp/scan_qr_code.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan QR Code</title>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"> </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <h1>Scan QR Code</h1>
+    <div id="qr-reader" style="width:500px"></div>
+    <p id="result"></p>
+    <form id="qr-form" method="post" action="{% url 'validate_ticket' %}" style="display: none;">
+        {% csrf_token %}
+        <input type="hidden" name="qr_code" id="qr_code">
+    </form>
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            $.ajax({
+                url: "{% url 'validate_ticket' %}",
+                method: "POST",
+                data: {
+                    qr_code: decodedText,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    $('#result').text(response.message);
+                    $('#result').removeClass('alert-danger').addClass('alert-success');
+                },
+                error: function(response) {
+                    $('#result').text(response.responseJSON.message);
+                    $('#result').removeClass('alert-success').addClass('alert-danger');
+                }
+            });
+        }
+
+        function onScanFailure(error) {
+            console.warn(`Code scan error = ${error}`);
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", 
+            { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    </script>
+    <style>
+        .alert-success {
+            color: green;
+        }
+        .alert-danger {
+            color: red;
+        }
+    </style>
+</body>
+</html>
+
